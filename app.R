@@ -1,19 +1,11 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+# Author: Alfredo Sánchez Alberca (asalber@ceu.es)
 
 library(shiny)
-#library(knitr)
 library(tidyverse)
 library(shinyjs)
 library(shinythemes)
-#library(DT)
-
+library(knitr)
+library(kableExtra)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(theme = shinytheme("cerulean"),
@@ -21,6 +13,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
     # Application title
     titlePanel("Assesment from rubric"),
     navbarPage(title = "",
+        # Data loading menu
         tabPanel("LOAD DATA", 
                  fileInput("file",
                            "Choose CSV files from directory",
@@ -28,18 +21,22 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                            accept=c('text/csv', 
                                     'text/comma-separated-values,text/plain', 
                                     '.csv')),
+                 # Data table
                  dataTableOutput("dataTable")),
+        # Grades computation menu
         tabPanel("GRADES", 
-                 fluidRow(
-                     actionButton(inputId = "computeGrades", "Compute grades", icon("paper-plane")),
-                     hidden(downloadButton("downloadGrades", "Download Grades", class = "btn-primary"))
-                 ),
+                 downloadButton("downloadGrades", "Download Grades", class = "btn-primary"),
+                 # Grades table
                  dataTableOutput("gradesTable"),
-                 
         ),
+        # Student assessment report
         tabPanel("REPORTS", 
-                 uiOutput("selectStudent"),
+                 flowLayout(uiOutput("selectStudent", inline = T),  htmlOutput("grade", inline = T)),
+                 # Assessment table
                  tableOutput("studentReport"),
+                 column(12, align="center", plotOutput('boxplot', width = "800px"), offset = 0),
+                 h3("Comments"),
+                 textOutput("comments")
         )
     )
 )
@@ -68,9 +65,9 @@ server <- function(input, output) {
     })
     
     # Compute grades
-    grades <- eventReactive(input$computeGrades, {
+    grades <- reactive({
+        req(input$file)
         data <- dataset()
-
         # Compute the grades
         grades <- data %>%
             # Replace NAs by 0
@@ -93,7 +90,7 @@ server <- function(input, output) {
     output$gradesTable <- renderDataTable(
         grades(), 
         options = list(
-            pageLength = 20
+            pageLength = 20, autoWidth = TRUE
         )
     )
     
@@ -104,38 +101,59 @@ server <- function(input, output) {
             write.csv(grades(), file, row.names = F)
         }
     )
-    
-    # Show download button
-    observeEvent(input$computeGrades, {
-        show("downloadGrades")
-    })
-    
-    # Show select input box for students
+   
     output$selectStudent <- renderUI(
         selectInput("student","Select student", choices= 
                         as.character(unique(unlist(dataset()[["Name"]]))))
     )
     
-    report <- eventReactive(input$student, {
+    data.student <- eventReactive(input$student, {
         data <- dataset()
-        data.student <- data %>% filter(Name == input$student) %>% select(Item, Weight, Assessment)
-        return(data.student)
+        data.student <- data %>% filter(Name == input$student) %>%
+            # Convert Achieved to numeric
+            mutate(Assessment = as.numeric(Assessment)) %>%
+            # Replace NAs by 0
+            replace_na(list(Assessment = 0)) %>%
+            # Add a new columns with the score
+            mutate(Score = Weight * Assessment) %>%
+            # Add a new column with Achivement
+            mutate(Achieved = recode(Assessment, "0" = "No", "0.5" = "Partially", "1.0" = "Yes"))
+        return(data.student) 
     })
     
-    output$studentReport <- renderTable({
+    output$grade <- renderUI({
         req(input$student)
-        report()
+        grades <- grades()
+        grade <- grades %>% filter(Name == input$student) %>% pull(Grade)
+        h3(paste("Grade: ", round(grade, 1)))
     })
-        
-        
-    # output$distPlot <- renderPlot({
-    #     # generate bins based on input$bins from ui.R
-    #     x    <- faithful[, 2]
-    #     bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    # 
-    #     # draw the histogram with the specified number of bins
-    #     hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    # })
+    
+    output$studentReport <- function() {
+        req(input$student)
+        data.student <- data.student()
+        data.student %>% 
+            mutate(Achieved = cell_spec(Achieved, "html", color = if_else(Achieved == "Yes", "green", if_else(Achieved == "Partially", "orange", "red")))) %>%
+            select(Item, Weight, Achieved, Score) %>%
+            kable(format = "html", escape = F, align = c("l", "c", "c", "c")) %>% 
+            kable_styling(bootstrap_options = c("striped"), full_width = F)
+    }
+    
+    output$boxplot <- renderPlot({
+        req(input$student)
+        grades <- grades()
+        grade <- grades %>% filter(Name == input$student) %>% pull(Grade)
+        boxplot(grades$Grade, horizontal = T, col = rgb(5, 161, 230, maxColorValue = 255), main = "Distribution of scores")
+        text(x = grade, y = 1.1, labels = "You")
+        points(grade, 1, col = "red", pch = 19)
+    })
+    
+    output$comments <- renderText({
+        req(input$student)
+        grades <- grades()
+        grade <- grades %>% filter(Name == input$student) %>% pull(Grade)
+        data.student <- data.student()
+        paste(data.student$Comments[1], if_else(grade<4, "You did not pass, but do not be discouraged because you can retake this exam in the ordinary examination. If you need some help, do not hesitate to ask for a tutorial.", ifelse(grade<5, "You do not need to retake this exam, but it is recommended that you take it again on the ordinary examination to improve your score.", "Congratulations! You pass.")))
+    })
     
 }
 
