@@ -1,0 +1,94 @@
+Chapter,Item,Weight
+Probability,Recognize the union of two events,1
+Probability,Recognize the intersection of two events,1
+Probability,Recognize the contrary of an event,1
+Probability,Recognize the difference of two events,1
+Probability,Recognize a conditional event,1
+Probability,Apply the Morgan’s laws,2
+Probability,Compute a probability with the Laplace definition ,1
+Probability,Compute a probability with the frequentist definition,1
+Probability,Compute the probability of the union of two events,2
+Probability,Compute the probability of the intersection of two events,2
+Probability,Compute the probability of the contrary of an event,1
+Probability,Compute the probability of difference of two events,2
+Probability,Compute a conditional probability,2
+Probability,Determine if two events are dependent or independent,3
+Probability,Construct the probability tree,3
+Probability,Compute the probability of an event adding the probability of its elements,2
+Probability,Apply the total probability theorem,3
+Probability,Apply the Bayes theorem,3
+Epidemiology,Compute the prevalence of a medical event,2
+Epidemiology,Compute the cumulative incidence of a medical event,1
+Epidemiology,Compute the risk of a medical event,2
+Epidemiology,Compute the relative risk of a medical event,2
+Epidemiology,Interpret the relative risk,3
+Epidemiology,Compute the odds of a medical event,2
+Epidemiology,Compute the odds ratio of a medical event,2
+Epidemiology,Interpret the odds ratio,3
+Epidemiology,Identify the more suitable association measure depending on the type of study (prospective or retrospective),3
+Epidemiology,"Recognize the true positive, true negative, false positive and false negative of a diagnostic test",1
+Epidemiology,Recognize the sensitivity of a diagnostic test,1
+Epidemiology,Recognize the specificity of a diagnostic test,1
+Epidemiology,Recognize the positive predictive value of a diagnostic test,1
+Epidemiology,Recognize the negative predictive value of a diagnostic test,1
+Epidemiology,Compute the sensitivity of a diagnostic test,2
+Epidemiology,Interpret the sensitivity of a diagnostic test,3
+Epidemiology,Compute the specificity of a diagnostic test,2
+Epidemiology,Interpret the specificity of a diagnostic test,3
+Epidemiology,Compute the probability of a positive outcome,2
+Epidemiology,Compute the probability of a negative outcome,2
+Epidemiology,Compute the positive predictive value of a test,2
+Epidemiology,Interpret the positive predictive value of a test,3
+Epidemiology,Compute the negative predictive value of a test,2
+Epidemiology,Interpret the negative predictive value of a test,3
+Epidemiology,Compute the probability of a right diagnose,2
+Epidemiology,Compute the probability of a wrong diagnose,2
+Epidemiology,Combine two different diagnostic tests,3
+Discrete random variables,Define a random variable to in the context of a problem,2
+Discrete random variables,"Identify the values of a random variable that satisfy an event like “none”, “all”, “some”, “at least”, “more”, “less” …",1
+Discrete random variables,Construct the probability function of a discrete random variable,2
+Discrete random variables,Construct the distribution function of a discrete random variable,2
+Discrete random variables,Plot the probability function of a discrete random variable,1
+Discrete random variables,Plot the distribution function of a discrete random variable,1
+Discrete random variables,Get the probability function from a probability plot of a discrete random variable,2
+Discrete random variables,Get the distribution function from a probability plot of a discrete random variable,2
+Discrete random variables,Compute the mean of a discrete random variable,2
+Discrete random variables,Compute the variance of a discrete random variable,2
+Discrete random variables,Recognize a discrete uniform distribution ,1
+Discrete random variables,Identify the parameters of a discrete uniform distribution,1
+Discrete random variables,Compute the probability of a value of a discrete uniform distribution,1
+Discrete random variables,Compute the cumulative probability of a value of a discrete uniform distribution,1
+Discrete random variables,Compute the mean of a discrete uniform distribution,1
+Discrete random variables,Compute the variance of a discrete uniform distribution,1
+Discrete random variables,Recognize a binomial distribution,3
+Discrete random variables,Identify the parameters of a binomial distribution,2
+Discrete random variables,Compute the probability of a value of a binomial distribution,2
+Discrete random variables,Compute the cumulative probability of a value of a binomial distribution,2
+Discrete random variables,Compute the mean of a binomial distribution,2
+Discrete random variables,Compute the variance of a binomial distribution,2
+Discrete random variables,Recognize a Poisson distribution,3
+Discrete random variables,Identify the parameters of a Poisson distribution,2
+Discrete random variables,Compute the probability of a value of a Poisson distribution,2
+Discrete random variables,Compute the cumulative probability of a value of a Poisson distribution,2
+Discrete random variables,Compute the mean of a Poisson distribution,1
+Discrete random variables,Compute the variance of a Poisson distribution,1
+Discrete random variables,Apply the law of rare events,3
+Continuous random variables,Check if a function is a density function ,2
+Continuous random variables,Compute a cumulative probability with a density function,2
+Continuous random variables,Compute the probability of an interval with a density function,2
+Continuous random variables,Compute the mean of a continuous distribution with the density function,2
+Continuous random variables,Compute the variance of a continuous distribution with the density function,2
+Continuous random variables,Recognize a continuous uniform distribution,2
+Continuous random variables,Identify the parameters of a continuous uniform distribution,1
+Continuous random variables,Compute the cumulative probability of a value of a continuous uniform distribution,2
+Continuous random variables,Compute the probability of an interval of a continuous uniform distribution,2
+Continuous random variables,Compute the mean of a continuous uniform distribution,1
+Continuous random variables,Compute the variance of a continuous uniform distribution,1
+Continuous random variables,Recognize a normal distribution,3
+Continuous random variables,Identify the parameters of a normal distribution,1
+Continuous random variables,Apply the properties of a normal distribution,2
+Continuous random variables,Apply the standardization transformation ,2
+Continuous random variables,Compute the cumulative probability of a value with the standard normal table,2
+Continuous random variables,Compute the probability of an interval of the standard normal distribution ,2
+Continuous random variables,Compute a percentile of the standard normal distribution,2
+Continuous random variables,Compute the number of individuals of a population that satisfy an event from its probability,1
