@@ -44,7 +44,7 @@ Epidemiology,Interpret the negative predictive value of a test,3
 Epidemiology,Compute the probability of a right diagnose,2
 Epidemiology,Compute the probability of a wrong diagnose,2
 Epidemiology,Combine two different diagnostic tests,3
-Discrete random variables,Define a random variable to in the context of a problem,2
+Discrete random variables,Define a random variable in the context of a problem,1
 Discrete random variables,"Identify the values of a random variable that satisfy an event like “none”, “all”, “some”, “at least”, “more”, “less” …",1
 Discrete random variables,Construct the probability function of a discrete random variable,2
 Discrete random variables,Construct the distribution function of a discrete random variable,2
@@ -61,13 +61,15 @@ Discrete random variables,Compute the cumulative probability of a value of a dis
 Discrete random variables,Compute the mean of a discrete uniform distribution,1
 Discrete random variables,Compute the variance of a discrete uniform distribution,1
 Discrete random variables,Recognize a binomial distribution,3
-Discrete random variables,Identify the parameters of a binomial distribution,2
+Discrete random variables,Identify the number of repetitions of a binomial distribution,1
+Discrete random variables,Identify the probability of success of a binomial distribution,2
 Discrete random variables,Compute the probability of a value of a binomial distribution,2
 Discrete random variables,Compute the cumulative probability of a value of a binomial distribution,2
 Discrete random variables,Compute the mean of a binomial distribution,2
 Discrete random variables,Compute the variance of a binomial distribution,2
 Discrete random variables,Recognize a Poisson distribution,3
 Discrete random variables,Identify the parameters of a Poisson distribution,2
+Discrete random variables,Change the mean of the Poisson depending on the unit interval considered,2
 Discrete random variables,Compute the probability of a value of a Poisson distribution,2
 Discrete random variables,Compute the cumulative probability of a value of a Poisson distribution,2
 Discrete random variables,Compute the mean of a Poisson distribution,1
@@ -91,4 +93,5 @@ Continuous random variables,Apply the standardization transformation ,2
 Continuous random variables,Compute the cumulative probability of a value with the standard normal table,2
 Continuous random variables,Compute the probability of an interval of the standard normal distribution ,2
 Continuous random variables,Compute a percentile of the standard normal distribution,2
+Continuous random variables,Get the mean and the standard deviation of a normal distribution solving a system of equations,2
 Continuous random variables,Compute the number of individuals of a population that satisfy an event from its probability,1
