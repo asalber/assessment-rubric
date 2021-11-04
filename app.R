@@ -363,8 +363,6 @@ server <- function(input, output) {
     # Show comments
     output$comments <- renderUI({
         req(input$student)
-        grades <- grades()
-        grade <- grades %>% filter(`Last Name` == input$student) %>% pull(Grade)
         data.student <- data.student()
         tagList(h3("Comments"), p(if_else(is.na(data.student$Comments[1]), '', data.student$Comments[1])))
     })
