@@ -196,13 +196,14 @@ server <- function(input, output) {
     output$downloadRubricTemplate <- downloadHandler(
         filename = paste0(input$examName, "-template.csv"),
         content = function(file) {
-            rubric <- selected.items() %>%
-                pivot_wider(id_cols=c(), names_from = Item, values_from = Weight) %>%
-                add_column(Comments = "", `Last Name` = "WEIGHT", `First Name` = "", Username = "", Taken = "") %>%
-                relocate(`Last Name`, `First Name`, Username, Taken) %>%
-                # Add students
-                add_row( data.students()) %>%
-                mutate_all(funs(replace_na(., "")))
+            rubric <- selected.items() %>% 
+              mutate(Weight = as.character(Weight)) %>%
+              pivot_wider(id_cols=c(), names_from = Item, values_from = Weight) %>%
+              add_column(Comments = "", `Last Name` = "WEIGHT", `First Name` = "", Username = "", Taken = "") %>%
+              relocate(`Last Name`, `First Name`, Username, Taken) %>%
+              # Add students
+              add_row( data.students()) %>%
+              mutate(across(everything(), ~replace_na(., "")))
             encoding <- encoding.items()
             if (encoding == "ISO-8859-1")
                 write_csv2(rubric, file)
@@ -227,6 +228,8 @@ server <- function(input, output) {
             data <- read_csv2(inFile$datapath, locale = locale(encoding = encoding))
         else 
             data <- read_csv(inFile$datapath, locale = locale(encoding = encoding))
+        # Convert the comments column to character (if not when there are no comments the column is loaded as logical)
+        data <- data %>% mutate(Comments = as.character(Comments))
         # Extract the weights of the questions
         weights <- data %>%
             filter(`Last Name` == "WEIGHT") %>%
@@ -364,14 +367,13 @@ server <- function(input, output) {
     output$comments <- renderUI({
         req(input$student)
         data.student <- data.student()
-        tagList(h3("Comments"), p(if_else(is.na(data.student$Comments[1]), '', data.student$Comments[1])))
+        if (!is.na(data.student$Comments[1])) tagList(h3("Comments"), p(data.student$Comments[1]))
     })
     
     # Generate reports
     output$downloadReports <- downloadHandler(
         # For PDF output, change this to "report.pdf"
         filename = "assessments.zip",
-        
         content = function(file) {
             # Copy the report file to a temporary directory before processing it, in
             # case we don't have write permissions to the current working dir (which
